@@ -28,6 +28,7 @@ class DensityProcessor {
 
 	public static function getAllWords( $content ): array {
 		$content = mb_strtolower( $content );
+		$content = strip_tags($content);
 
 		return array_filter( preg_split( '/[^[:alpha:]]+/us', $content ) );
 	}
