@@ -20,7 +20,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\UserIdentity',
+            'identityClass' => 'app\helpers\UserIdentity',
             'enableAutoLogin' => true,
             'loginUrl'=>['/auth/login'],
             'on afterLogin' => function($event)
