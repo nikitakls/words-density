@@ -11,52 +11,52 @@ namespace app\services;
 use app\collections\UsersCollection;
 use app\forms\LoginForm;
 use app\forms\SignupForm;
-use app\models\User;
 use app\helpers\UserIdentity;
+use app\models\User;
 
-class UserService {
+class UserService
+{
 
-	private $users;
+    private $users;
 
-	public function __construct( UsersCollection $users ) {
-		$this->users = $users;
-	}
+    public function __construct(UsersCollection $users)
+    {
+        $this->users = $users;
+    }
 
-	/**
-	 * Signup user
-	 *
-	 * @throws \RuntimeException
-	 *
-	 * @param SignupForm $form
-	 *
-	 * @return User
-	 */
-	public function signup( SignupForm $form ) {
-		$user = User::signup( $form );
-		$this->users->save( $user );
+    /**
+     * Signup user
+     *
+     * @throws \RuntimeException
+     * @param SignupForm $form
+     * @return User
+     */
+    public function signup(SignupForm $form)
+    {
+        $user = User::signup($form);
+        $this->users->save($user);
 
-		return $user;
-	}
+        return $user;
+    }
 
 
-	/**
-	 * Auth user
-	 *
-	 * @throws \DomainException
-	 *
-	 * @param LoginForm $form
-	 *
-	 * @return UserIdentity
-	 */
+    /**
+     * Auth user
+     *
+     * @throws \DomainException
+     * @param LoginForm $form
+     * @return UserIdentity
+     */
 
-	public function auth( LoginForm $form ): UserIdentity {
-		/* @var $user \app\models\User */
-		$user = $this->users->findByUsername( $form->username );
-		if ( ! $user || ! $user->validatePassword( $form->password ) ) {
-			throw new \DomainException( 'Undefined user or password.' );
-		}
+    public function auth(LoginForm $form): UserIdentity
+    {
+        /* @var $user \app\models\User */
+        $user = $this->users->findByUsername($form->username);
+        if (!$user || !$user->validatePassword($form->password)) {
+            throw new \DomainException('Undefined user or password.');
+        }
 
-		return new UserIdentity( $user );
-	}
+        return new UserIdentity($user);
+    }
 
 }

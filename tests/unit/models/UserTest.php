@@ -7,19 +7,19 @@ use app\helpers\UserIdentity;
 
 class UserTest extends \Codeception\Test\Unit
 {
-	protected $tester;
+    protected $tester;
 
-	public function _before()
-	{
-		$this->tester->haveFixtures([
-			'user' => [
-				'class' => UserFixture::className(),
-				'dataFile' => codecept_data_dir() . 'user.php'
-			]
-		]);
-	}
+    public function _before()
+    {
+        $this->tester->haveFixtures([
+            'user' => [
+                'class' => UserFixture::className(),
+                'dataFile' => codecept_data_dir() . 'user.php'
+            ]
+        ]);
+    }
 
-	public function testFindUserById()
+    public function testFindUserById()
     {
         expect_that($user = UserIdentity::findIdentity(1));
         expect($user->username)->equals('okirlin');

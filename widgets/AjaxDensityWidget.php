@@ -6,44 +6,47 @@ use Yii;
 use yii\base\Widget;
 use yii\data\BaseDataProvider;
 
-class AjaxDensityWidget extends Widget {
+class AjaxDensityWidget extends Widget
+{
 
-	public $visible = true;
+    public $visible = true;
 
-	/**
-	 * @var string url route for loading data via ajax.
-	 */
+    /**
+     * @var string url route for loading data via ajax.
+     */
 
-	public $loadUrl;
+    public $loadUrl;
 
-	/**
-	 * @var BaseDataProvider.
-	 */
-	public $dataProvider;
+    /**
+     * @var BaseDataProvider.
+     */
+    public $dataProvider;
 
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function run() {
-		if ( ! $this->visible ) {
-			return '';
-		}
+    /**
+     * {@inheritdoc}
+     */
+    public function run()
+    {
+        if (!$this->visible) {
+            return '';
+        }
 
-		if($this->dataProvider == null)
-			$this->registerJs();
+        if ($this->dataProvider == null)
+            $this->registerJs();
 
-		return $this->render( '_density', [
-			'id'           => $this->id,
-			'dataProvider' => $this->dataProvider,
-		] );
-	}
+        return $this->render('_density', [
+            'id' => $this->id,
+            'dataProvider' => $this->dataProvider,
+        ]);
+    }
 
-	public function registerJs() {
-		$view = Yii::$app->getView();
-		$view->registerJs( '
+    public function registerJs()
+    {
+        $view = Yii::$app->getView();
+        $view->registerJs('
 			$.pjax.reload({container:"#density-' . $this->id . '", url:"' . $this->loadUrl . '", "push":false,"replace":false})
-		' );
-	}
+		');
+    }
 
 }

@@ -4,25 +4,28 @@ namespace app\collections;
 
 use app\models\Content;
 
-class ContentsCollection {
+class ContentsCollection
+{
 
-	public function findLastForUser( $userID ): Content {
-		$model = Content::find()
-		                ->where( [ 'user_id' => $userID ] )
-		                ->orderBy( 'id DESC' )
-		                ->limit( 1 )
-		                ->one();
-		if ( ! $model ) {
-			throw new \RuntimeException( 'Content not find.' );
-		}
+    public function findLastForUser($userID): Content
+    {
+        $model = Content::find()
+            ->where(['user_id' => $userID])
+            ->orderBy('id DESC')
+            ->limit(1)
+            ->one();
+        if (!$model) {
+            throw new \RuntimeException('Content not find.');
+        }
 
-		return $model;
-	}
+        return $model;
+    }
 
-	public function save( Content $content ) {
-		if ( ! $content->save() ) {
-			throw new \RuntimeException( 'Saving error.' );
-		}
-	}
+    public function save(Content $content)
+    {
+        if (!$content->save()) {
+            throw new \RuntimeException('Saving error.');
+        }
+    }
 
 }

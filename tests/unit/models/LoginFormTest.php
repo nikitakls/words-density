@@ -3,7 +3,6 @@
 namespace tests\models;
 
 use app\forms\LoginForm;
-use Codeception\Specify;
 
 class LoginFormTest extends \Codeception\Test\Unit
 {
