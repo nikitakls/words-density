@@ -4,9 +4,16 @@ namespace tests\models;
 
 use app\fixtures\UserFixture;
 use app\helpers\UserIdentity;
-
+/**
+ * Class LoginFormTest
+ * @package tests\models
+ * @mixin \UnitTester
+ */
 class UserTest extends \Codeception\Test\Unit
 {
+    /**
+     * @var \UnitTester
+     */
     protected $tester;
 
     public function _before()
@@ -36,7 +43,7 @@ class UserTest extends \Codeception\Test\Unit
     /**
      * @depends testFindUserByUsername
      */
-    public function testValidateUser($user)
+    public function testValidateUser()
     {
         $user = UserIdentity::findByUsername('okirlin');
 

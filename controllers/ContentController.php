@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use app\services\ContentService;
-use app\widgets\AjaxDensityWidget;
 use Yii;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
@@ -22,13 +21,6 @@ class ContentController extends Controller
         try {
             $service = Yii::$container->get(ContentService::class);
             $data = $service->getLastTextDensity(Yii::$app->user->id);
-            /*$data = [
-                'w1' => 1,
-                'w2' => 1,
-                'w3' => 1,
-                'w4' => 1,
-                'w5' => 1,
-            ];*/
             $dataProvider = new ArrayDataProvider([
                 'allModels' => array_map(function ($count, $word) {
                     return ['word' => $word, 'count' => $count];
@@ -36,15 +28,14 @@ class ContentController extends Controller
 
             ]);
 
-            return AjaxDensityWidget::widget([
-                    'dataProvider' => $dataProvider,
-                ]
-            );
-
+            return $this->renderAjax('content', [
+                'dataProvider' => $dataProvider
+            ]);
         } catch (\DomainException $e) {
-            return ['status' => 'error', 'message' => $e->getMessage()];
+            return $this->renderAjax('error', [
+                'message' => $e->getMessage()
+            ]);
         }
-
     }
 
 }

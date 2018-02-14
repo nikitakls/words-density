@@ -28,6 +28,11 @@ return [
 	        'class' => 'yii\web\User',
             'identityClass' => 'app\models\UserIdentity',
         ],
+        'request' => [
+            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+            'cookieValidationKey' => 'K79Rq-8gQr4p2gLj5CKduDYSbABUcN9u',
+        ],
+
     ],
     'params' => $params,
 ];
